@@ -95,11 +95,11 @@ Feature folders are self-contained — components, hooks, types, and storage cal
 ## Branching
 
 | Branch                       | Purpose                                        |
-| ----------------------------- | ----------------------------------------------- |
-| `main`                        | Production-ready code                          |
-| `add/desc`, `update/desc`     | New features                                   |
-| `fix/desc`                    | Bug fixes                                      |
-| `chore/desc`, `improve/desc`  | Maintenance tasks (dependencies, config, etc.) |
+| ---------------------------- | ---------------------------------------------- |
+| `main`                       | Production-ready code                          |
+| `add/desc`, `update/desc`    | New features                                   |
+| `fix/desc`                   | Bug fixes                                      |
+| `chore/desc`, `improve/desc` | Maintenance tasks (dependencies, config, etc.) |
 
 ---
 
