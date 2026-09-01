@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  pull_request:
+  # Feature branches are covered by pull_request; this catches whatever lands on main.
+  push:
+    branches: [main]
+
+# Least privilege: neither job writes to the repo.
+permissions:
+  contents: read
+
+# Supersede redundant runs on the same branch, but never cancel a main run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  static-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      # Run even if lint failed, so one CI run reports both lint and type errors.
+      - run: npm run typecheck
+        if: ${{ !cancelled() }}
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm test
