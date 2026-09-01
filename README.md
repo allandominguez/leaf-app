@@ -1,5 +1,7 @@
 # leaf
 
+[![CI](https://github.com/allandominguez/leaf-app/actions/workflows/ci.yml/badge.svg)](https://github.com/allandominguez/leaf-app/actions/workflows/ci.yml)
+
 > **Status:** 🚧 Early development — project scaffolding is in place; core capture/timeline/search flow (Epics 1–5) is not yet built.
 
 A minimal, mindful, local-first personal memory app. Capture small fragments worth keeping — thoughts, ideas, recommendations, decisions — and find them again later, even when you only vaguely remember what you're looking for.
@@ -51,7 +53,7 @@ No accounts, no sync, no backend user model — v1 is single-user, single-device
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) v18 or v20 (LTS)
+- [Node.js](https://nodejs.org/) 22.13+ (Node 24 LTS recommended — see [`.nvmrc`](.nvmrc); this is what CI runs)
 - [Expo Go](https://expo.dev/go) on your Android device, or a connected Android device with USB debugging enabled
 
 ### Installation
@@ -105,15 +107,13 @@ Feature folders are self-contained — components, hooks, types, and storage cal
 
 ## Development
 
-Lint, typecheck, and test scripts are being set up as part of Epic 1 — this section will fill in as they land:
-
 ```bash
-npm run lint       # ESLint on .ts/.tsx (planned)
-npm run typecheck  # tsc --noEmit (planned)
-npm test           # Jest (planned)
+npm run lint       # expo lint (ESLint) on .ts/.tsx
+npm run typecheck  # tsc --noEmit
+npm test           # Jest
 ```
 
-Pre-commit hooks (gitleaks secrets scanning, lint-staged) are also planned but not yet wired up.
+All three run on every pull request and on pushes to `main` via [GitHub Actions](.github/workflows/ci.yml), and a passing run is required to merge. Pre-commit hooks (gitleaks secrets scanning, lint-staged) run the same lint/format checks locally on staged files.
 
 ---
 
