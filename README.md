@@ -56,6 +56,18 @@ No accounts, no sync, no backend user model — v1 is single-user, single-device
 - [Node.js](https://nodejs.org/) 22.13+ (Node 24 LTS recommended — see [`.nvmrc`](.nvmrc); this is what CI runs)
 - [Expo Go](https://expo.dev/go) on your Android device, or a connected Android device with USB debugging enabled
 
+### Node version
+
+The repo pins Node via [`.nvmrc`](.nvmrc) (currently Node 24), and CI reads that same file. A version manager keeps your local Node in step automatically — with [fnm](https://github.com/Schniz/fnm):
+
+```bash
+brew install fnm
+eval "$(fnm env --use-on-cd)"   # add to your shell profile — see fnm's shell setup docs
+fnm install                     # reads .nvmrc, installs the pinned Node
+```
+
+`cd`-ing into the project then selects the pinned version automatically. [`nvm`](https://github.com/nvm-sh/nvm) works too — it reads the same `.nvmrc` (without the auto-switch-on-`cd`).
+
 ### Installation
 
 ```bash
