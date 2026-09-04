@@ -48,5 +48,10 @@
   "jest": {
     "preset": "jest-expo"
   },
-  "private": true
+  "private": true,
+  "allowScripts": {
+    "better-sqlite3@13.0.3": true,
+    "fsevents@2.3.3": true,
+    "unrs-resolver@1.12.2": true
+  }
 }
