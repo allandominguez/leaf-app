@@ -23,10 +23,19 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: npm
+      # Jobs sharing this key may log "Failed to save: ... another job may be
+      # creating this cache" — expected; check other jobs for "Cache saved with key".
+      - uses: actions/cache@v6
+        id: node-modules-cache
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('.nvmrc') }}-${{ hashFiles('package-lock.json') }}
       - run: npm ci
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+      # Run every static check even if an earlier one failed, so one CI run reports all issues at once.
+      - run: npx expo-doctor
       - run: npm run lint
-      # Run even if lint failed, so one CI run reports both lint and type errors.
+        if: ${{ !cancelled() }}
       - run: npm run typecheck
         if: ${{ !cancelled() }}
 
@@ -37,6 +46,13 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: npm
+      # Jobs sharing this key may log "Failed to save: ... another job may be
+      # creating this cache" — expected; check other jobs for "Cache saved with key".
+      - uses: actions/cache@v6
+        id: node-modules-cache
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('.nvmrc') }}-${{ hashFiles('package-lock.json') }}
       - run: npm ci
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
       - run: npm test
