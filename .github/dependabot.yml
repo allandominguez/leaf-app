@@ -7,3 +7,11 @@ updates:
     groups:
       expo-sdk:
         patterns: ["expo*", "react-native*"]
+    ignore:
+      # Exact-pinned by Expo SDK curation; only `expo install --check` should move these.
+      - dependency-name: "react-native"
+      - dependency-name: "jest"
+      - dependency-name: "@types/jest"
+      # eslint-config-expo doesn't support ESLint 10 yet; temporary.
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
