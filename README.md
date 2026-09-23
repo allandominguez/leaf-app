@@ -1,6 +1,7 @@
 # leaf
 
 [![CI](https://github.com/allandominguez/leaf-app/actions/workflows/ci.yml/badge.svg)](https://github.com/allandominguez/leaf-app/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/allandominguez/leaf-app/actions/workflows/codeql.yml/badge.svg)](https://github.com/allandominguez/leaf-app/actions/workflows/codeql.yml)
 
 > **Status:** 🚧 Early development — project scaffolding is in place; core capture/timeline/search flow (Epics 1–5) is not yet built.
 
